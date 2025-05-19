@@ -1,0 +1,9 @@
+Framework,Learning,Dataset,Emissions
+scDLC,Deep Learning,dataset_A,0.0027858993353776
+scCDCG,Deep Learning,dataset_A,0.0019397861474564
+scSMD,Deep Learning,dataset_A,0.0047561533006343
+ACTINN,Deep Learning,dataset_A,0.0022807842322749
+scDLC,Federated Learning,dataset_A,0.0032122030636831
+scCDCG,Federated Learning,dataset_A,0.0026704382739305
+scSMD,Federated Learning,dataset_A,0.0050180511265176
+ACTINN,Federated Learning,dataset_A,0.00259481520738
