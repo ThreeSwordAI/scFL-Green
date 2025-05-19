@@ -1,0 +1,9 @@
+Client,Method,FineTune,Emission (kWh)
+A,Baseline,with,0.0007132952579875059
+A,SmallBatch,with,0.00016639957497221368
+A,MixedPrecision,with,4.3183981509429704e-05
+A,ReduceComplexity,with,6.31981227596907e-05
+B,Baseline,with,2.417231036534269e-07
+B,SmallBatch,with,0.00011519588706422176
+B,MixedPrecision,with,0.00013630410178693954
+B,ReduceComplexity,with,6.264699500728933e-05

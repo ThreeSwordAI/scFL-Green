@@ -1,0 +1,17 @@
+Client,Method,FineTune,Emission (kWh)
+A,Baseline,without,0.00025696691817123665
+A,Baseline,with,5.4278983574032636e-05
+A,SmallBatch,without,0.00015108759820187174
+A,SmallBatch,with,4.2548297111926004e-05
+A,MixedPrecision,without,0.00013403402813545317
+A,MixedPrecision,with,4.2583095352354426e-05
+A,ReduceComplexity,without,0.0001280520528646586
+A,ReduceComplexity,with,4.400416612374829e-05
+B,Baseline,without,0.00013682474821888804
+B,Baseline,with,4.584590595410917e-05
+B,SmallBatch,without,0.00015447817280717386
+B,SmallBatch,with,4.869854472527027e-05
+B,MixedPrecision,without,0.00016819211920211644
+B,MixedPrecision,with,4.9133799828725236e-05
+B,ReduceComplexity,without,0.0001384953614826274
+B,ReduceComplexity,with,4.3545784055826764e-05
