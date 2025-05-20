@@ -39,17 +39,18 @@ pip install -r requirements.txt
 ```
 scFL‑Green/
 ├── Pipeline/
-│   ├── FL_main.py      # Federated training driver
-│   ├── fine_tune.py    # Fine‑tuning script
-│   └── <x>_Models.py   # scCDCG, scDLC, scSMD, ACTINN definitions
-├── Data/
-│   ├── Training/       # CSVs for each client (e.g. Data/Training/ClientA/...)
-│   ├── Testing/        # Optional held‑out test CSVs
-│   └── Fine_Tune/      # CSV(s) for fine‑tuning
-├── Results/
-│   ├── Federated/     # FL outputs (global weights, metrics)
-│   └── Fine_Tune/     # fine‑tune metrics, plots, checkpoints
-└── requirements.txt
+│   ├── FL_main.py          # Federated training driver
+│   ├── fine_tune.py        # Fine‑tuning script
+│   ├── <x>_model.py        # scCDCG, scDLC, scSMD, ACTINN definitions
+│   └── Data/
+│   │   ├── Training/       # CSVs for each client (e.g. Data/Training/ClientA/...)
+│   │   ├── Testing/        # Optional held‑out test CSVs
+│   │   └── Fine_Tune/      # CSV(s) for fine‑tuning
+│   └── Results/
+│       ├── Federated/      # FL outputs (global weights, metrics)
+│       └── Fine_Tune/      # fine‑tune metrics, plots, checkpoints
+├── Experiments/            # Part II: Experiments Reproduction
+└── requirements.txt        # Dependency list
 ```
 
 ### 3. Running Federated Training
@@ -89,14 +90,15 @@ Reproduce the benchmarks, tables, and figures from our study.
 ```
 scFL‑Green/
 ├── Experiments/
-    ├── Analysis/               # Scripts for generating report graphs
-    └── methodology/            # Experimental code and raw/processed data
-       ├── raw_data/            # Place original scRNA‑seq datasets A–D
-       ├── data_preprocessing/  # Data processing part
-       ├── frameworks/          # per‑model training scripts per dataset
-       ├── processed_data/      # outputs of preprocessing
-       └── graphs/              # saved experiment figures
-
+│    ├── Analysis/                # Scripts for generating report graphs
+│    └── methodology/             # Experimental code and raw/processed data
+│        ├── raw_data/            # Place original scRNA‑seq datasets A–D
+│        ├── data_preprocessing/  # Data processing part
+│        ├── frameworks/          # per‑model training scripts per dataset
+│        ├── processed_data/      # outputs of preprocessing
+│        └── graphs/              # saved experiment figures
+├── Pipeline/                     # Part I: Pipeline Usage
+└── requirements.txt              # Dependency list
 ```
 
 ### 2. Prerequisites
