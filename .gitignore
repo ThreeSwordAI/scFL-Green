@@ -3,3 +3,5 @@ Experiments/**/*.pdf
 Experiments/**/*.pth
 
 scFL-Green/
+
+__pycache__/
