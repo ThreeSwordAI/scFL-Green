@@ -2,7 +2,7 @@
 
 **Optimizing Federated Learning for Single‑Cell Classification with Carbon‑Aware Fine‑Tuning**
 
-scFL‑Green benchmarks and optimizes federated learning (FL) workflows for single‑cell RNA‑seq classification under sustainable, carbon‑aware settings. We integrate four state‑of‑the‑art classifiers (scCDCG, scDLC, scSMD, ACTINN) with three environmental optimizations (SmallBatch, MixedPrecision, ReduceComplexity) and a fine‑tuning stage to reduce training rounds and emissions while preserving or improving accuracy citeturn3file1.
+scFL‑Green benchmarks and optimizes federated learning (FL) workflows for single‑cell RNA‑seq classification under sustainable, carbon‑aware settings. We integrate four state‑of‑the‑art classifiers (scCDCG, scDLC, scSMD, ACTINN) with three environmental optimizations (SmallBatch, MixedPrecision, ReduceComplexity) and a fine‑tuning stage to reduce training rounds and emissions while preserving or improving accuracy.
 
 ---
 
