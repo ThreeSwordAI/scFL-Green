@@ -1,0 +1,12 @@
+torch
+torchvision
+flwr
+numpy
+pandas
+matplotlib
+scikit-learn
+tqdm
+PyYAML
+tensorboard
+seaborn
+h5py

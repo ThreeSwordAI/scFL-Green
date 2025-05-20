@@ -58,10 +58,10 @@ scFL-Green/
 - Install Python dependencies:
 
 ```bash
-pip install pandas numpy seaborn matplotlib
+pip install requirements.txt
 ````
 
-* PyTorch or TensorFlow (depending on framework)
+* **GPU Training:** Visit [PyTorch’s Get Started page](https://pytorch.org/get-started/locally), select your operating system, package, language, and CUDA version, then copy and run the provided installation command.
 
 ---
 
