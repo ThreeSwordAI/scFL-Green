@@ -3,9 +3,11 @@
 
 This repository contains the code, data preprocessing scripts, and analysis pipelines used in the scFL-Green project, which benchmarks and optimizes federated learning (FL) for single-cell RNA-seq classification under carbon-aware settings (SmallBatch, MixedPrecision, ReduceComplexity, and Fine-Tuning). The detailed project report is included as a PDF in the repository root.
 
+
+## Experiments
 ---
 
-## Repository Structure
+## Structure for Experiments
 
 ```
 
