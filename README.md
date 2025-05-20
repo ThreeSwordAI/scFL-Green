@@ -42,7 +42,7 @@ scFL‑Green/
 │   ├── FL_main.py          # Federated training driver
 │   ├── fine_tune.py        # Fine‑tuning script
 │   ├── <x>_model.py        # scCDCG, scDLC, scSMD, ACTINN definitions
-│   └── Data/
+│   ├── Data/
 │   │   ├── Training/       # CSVs for each client (e.g. Data/Training/ClientA/...)
 │   │   ├── Testing/        # Optional held‑out test CSVs
 │   │   └── Fine_Tune/      # CSV(s) for fine‑tuning
