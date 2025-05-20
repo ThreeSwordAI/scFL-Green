@@ -1,142 +1,153 @@
 # scFL-Green
-**Optimizing Federated Learning for Single-Cell Classification with Carbon-Aware Fine-Tuning**
 
-This repository contains the code, data preprocessing scripts, and analysis pipelines used in the scFL-Green project, which benchmarks and optimizes federated learning (FL) for single-cell RNA-seq classification under carbon-aware settings (SmallBatch, MixedPrecision, ReduceComplexity, and Fine-Tuning). The detailed project report is included as a PDF in the repository root.
+**Optimizing Federated Learning for Single‑Cell Classification with Carbon‑Aware Fine‑Tuning**
 
+scFL‑Green benchmarks and optimizes federated learning (FL) workflows for single‑cell RNA‑seq classification under sustainable, carbon‑aware settings. We integrate four state‑of‑the‑art classifiers (scCDCG, scDLC, scSMD, ACTINN) with three environmental optimizations (SmallBatch, MixedPrecision, ReduceComplexity) and a fine‑tuning stage to reduce training rounds and emissions while preserving or improving accuracy citeturn3file1.
 
-## Experiments
 ---
 
-## Structure for Experiments
+## Part I: Pipeline Usage
 
+This section helps you quickly apply scFL‑Green to your own data.
+
+### 1. Environment Setup
+
+#### Windows (CMD/PowerShell)
+
+```batch
+python -m venv venv
+venv\\Scripts\\activate
 ```
 
-scFL-Green/
-├── Experiments/
-│   ├── Analysis/           # Scripts to generate graphs for the project report
-│   └── methodoloy/         # All experimental code (note spelling intentional)
-│       ├── data\_preprocessing/
-│       │   ├── preprocessing\_dataset\_A.py
-│       │   └── preprocessing\_dataset\_B.py
-│       ├── testing\_dataset\_A.py
-│       ├── frameworks/     # Framework implementations for each dataset
-│       │   ├── ACTINN\_dataset\_A/
-│       │   ├── ACTINN\_dataset\_B/
-│       │   ├── ACTINN\_dataset\_C/
-│       │   ├── ACTINN\_dataset\_D/
-│       │   ├── scCDCG\_dataset\_A/
-│       │   ├── scCDCG\_dataset\_B/
-│       │   ├── scCDCG\_dataset\_C/
-│       │   ├── scCDCG\_dataset\_D/
-│       │   ├── scDLC\_dataset\_A/
-│       │   ├── scDLC\_dataset\_B/
-│       │   ├── scDLC\_dataset\_C/
-│       │   ├── scDLC\_dataset\_D/
-│       │   ├── scSMD\_dataset\_A/
-│       │   ├── scSMD\_dataset\_B/
-│       │   ├── scSMD\_dataset\_C/
-│       │   └── scSMD\_dataset\_D/
-│       ├── graphs/         # Folder to save generated graphs
-│       ├── models/         # Folder for trained model weights (excluded due to size)
-│       ├── processed\_data/ # Preprocessed datasets after running scripts
-│       │   ├── dataset\_A/
-│       │   ├── dataset\_B/
-│       │   ├── dataset\_C/
-│       │   └── dataset\_D/
-│       └── raw\_data/       # Raw datasets to be placed here
-│           ├── dataset\_A/
-│           ├── dataset\_B/
-│           ├── dataset\_C/
-│           └── dataset\_D/
-
-````
-
----
-
-## Prerequisites
-
-- Python ≥ 3.8
-- Git
-- Install Python dependencies:
+#### macOS/Linux (bash)
 
 ```bash
-pip install requirements.txt
-````
+python3 -m venv venv
+source venv/bin/activate
+```
+
+#### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
 
 * **GPU Training:** Visit [PyTorch’s Get Started page](https://pytorch.org/get-started/locally), select your operating system, package, language, and CUDA version, then copy and run the provided installation command.
 
+### 2. Folder Structure
+
+```
+scFL‑Green/
+├── Pipeline/
+│   ├── FL_main.py      # Federated training driver
+│   ├── fine_tune.py    # Fine‑tuning script
+│   └── <x>_Models.py   # scCDCG, scDLC, scSMD, ACTINN definitions
+├── Data/
+│   ├── Training/       # CSVs for each client (e.g. Data/Training/ClientA/...)
+│   ├── Testing/        # Optional held‑out test CSVs
+│   └── Fine_Tune/      # CSV(s) for fine‑tuning
+├── Results/
+│   ├── Federated/     # FL outputs (global weights, metrics)
+│   └── Fine_Tune/     # fine‑tune metrics, plots, checkpoints
+└── requirements.txt
+```
+
+### 3. Running Federated Training
+
+1. Drop client‑specific CSVs into `Data/Training/<ClientName>/`.
+2. (Optional) Add test CSV(s) into `Data/Testing/`.
+3. Execute:
+
+   ```bash
+   cd Pipeline
+   python FL_main.py 
+   ```
+4. Find global model weights in `Models/`.
+4. Find global model per‑round emissions, accuracy and F1 in `Results/`.
+
+### 4. Running Fine‑Tuning
+
+1. Place your new data CSV(s) in `Data/Fine_Tune/`.
+2. Run:
+
+   ```bash
+   cd Pipeline #if you are not in the folder
+   python fine_tune.py
+   ```
+3. Review scratch vs. fine‑tune accuracies in `Results/Fine_Tune/fine_tune_results.csv` and PNG plots in `Results/Fine_Tune/plots/`.
+
+> **Note:** Data included here are pseudo‑simulated. Replace with your own scRNA‑seq CSVs to get valid results.
+
 ---
 
-## Step-by-Step Guide to Replicate Results
+## Part II: Experiments Reproduction
 
-### 1. Clone the repository
+Reproduce the benchmarks, tables, and figures from our study.
 
-```bash
-git clone https://github.com/ThreeSwordAI/scFL-Green.git
-cd scFL-Green/Experiments/methodoloy/raw_data
+### 1. Repository Layout
+
+```
+scFL‑Green/
+├── Experiments/
+    ├── Analysis/               # Scripts for generating report graphs
+    └── methodology/            # Experimental code and raw/processed data
+       ├── raw_data/            # Place original scRNA‑seq datasets A–D
+       ├── data_preprocessing/  # Data processing part
+       ├── frameworks/          # per‑model training scripts per dataset
+       ├── processed_data/      # outputs of preprocessing
+       └── graphs/              # saved experiment figures
+
 ```
 
-### 2. Download and organize datasets
+### 2. Prerequisites
 
-Place each dataset into the corresponding `raw_data/dataset_<X>` folder:
+* Python ≥ 3.8
+* `pip install -r requirements.txt`
 
-* **Dataset A:** [CellXGene Collection](https://cellxgene.cziscience.com/collections/0aab20b3-c30c-4606-bd2e-d20dae739c45)
-* **Dataset B:** [scDLC Data release](https://github.com/scDLC-code/scDLC/releases/tag/Data)
-* **Dataset C:** [scDLC Data release](https://github.com/scDLC-code/scDLC/releases/tag/Data)
-* **Dataset D:** [CellXGene Collection](https://cellxgene.cziscience.com/collections/e1a9ca56-f2ee-435d-980a-4f49ab7a952b?utm_source)
+* **GPU Training:** Visit [PyTorch’s Get Started page](https://pytorch.org/get-started/locally), select your operating system, package, language, and CUDA version, then copy and run the provided installation command.
+* (GPU recommended for mixed‑precision)
 
-### 3. Preprocess datasets
+### 3. Data Preparation
+
+
+1. Place raw CSVs into `Experiments/methodology/raw_data/dataset_<A|B|C|D>/`.
+2. From `Experiments/methodology/`:
+
+   ```bash
+   cd data_preprocessing
+   python preprocessing_dataset_A.py
+   # repeat for B, C, D
+   ```
+
+### 4. Running Experiments
+
+For each framework and dataset:
 
 ```bash
-cd ../data_preprocessing
-python preprocessing_dataset_A.py
-python preprocessing_dataset_B.py
-# similarly for other datasets
+cd Experiments/methodology/frameworks/scDLC_dataset_A
+python scDLC_fl_train.py     # FL baseline & optimizations
+python scDLC_dl_fine_tune.py # Fine‑tuning
 ```
 
-Preprocessed outputs go to `processed_data/dataset_<X>/`
+Repeat for scCDCG, scSMD, ACTINN and datasets A–D.
 
-### 4. Verify dataset preprocessing
+### 5. Generating Figures
 
-```bash
-python testing_dataset_A.py
-```
-
-### 5. Run framework training and evaluation
-
-Navigate to desired framework folder:
+From `Experiments/Analysis/`:
 
 ```bash
-cd ../frameworks/scDLC_dataset_A
-python scDLC_model.py           # define model
-python scDLC_dl_train.py        # deep learning training
-python scDLC_fl_train.py        # federated learning training
-python scDLC_dl_fine_tune.py    # fine-tuning
-```
-
-> **Note:**
->
-> * `ACTINN` framework does not have fine-tuning (`dl_fine_tune`) scripts.
-
-Repeat the above for each dataset (`A`, `B`, `C`, `D`) and each framework (`scDLC`, `scCDCG`, `scSMD`, `ACTINN`).
-
-### 6. Generate analysis graphs
-
-```bash
-cd ../../Analysis
-python Analysis_emissions_boxplot_normalized.py
-python Analysis_baseline_boxplot_f1.py
 python Analysis_FL_OnlyMethods_3Plots.py
 python Analysis_scCDCG_scSMD_FL_Accuracy_2Subplots.py
+# etc.
 ```
 
-Graphs will be saved in the designated `outputs` folder.
+Outputs saved under `Experiments/Analysis/outputs/`.
 
 ---
 
-## Reference Tables
+## Tables
 
-### Frameworks
+### Table 1: Frameworks
 
 | Framework  | Paper                                                                                                                                                                          | Code                                        |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------- |
@@ -145,7 +156,8 @@ Graphs will be saved in the designated `outputs` folder.
 | **scSMD**  | [scSMD: a deep learning method for accurate clustering of single cells based on auto-encoder](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-025-06047-x) | [Link](https://github.com/xiaoxuc/scSMD)    |
 | **ACTINN** | [ACTINN: automated identification of cell types in single cell RNA sequencing](https://academic.oup.com/bioinformatics/article/36/2/533/5540320)                               | [Link](https://github.com/mafeiyang/ACTINN) |
 
-### Datasets
+
+### Table 2: Datasets
 
 | Dataset | Tissue      | Source                                                                                               |
 | ------- | ----------- | ---------------------------------------------------------------------------------------------------- |
@@ -154,7 +166,10 @@ Graphs will be saved in the designated `outputs` folder.
 | **C**   | Pancreas    | [Link](https://github.com/scDLC-code/scDLC/releases/tag/Data)                                        |
 | **D**   | Blood       | [Link](https://cellxgene.cziscience.com/collections/e1a9ca56-f2ee-435d-980a-4f49ab7a952b?utm_source) |
 
+
 ---
+
+
 
 ## License
 

@@ -10,3 +10,10 @@ PyYAML
 tensorboard
 seaborn
 h5py
+codecarbon 
+scanpy
+tqdm
+json
+os
+collections
+copy
